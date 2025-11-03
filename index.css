@@ -45,7 +45,6 @@
   flex-wrap: wrap; /* allows wrapping on smaller screens */
 }
 
-
 .header {
   width: 100%;
   display: flex;
@@ -73,4 +72,52 @@
 .alogo {
   height: 60px;
   width: auto;
+}
+
+/* ErrorPage.css */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #102a43;
+  text-align: center;
+}
+
+.error-container h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #334e68;
+}
+
+.error-container p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  color: #486581;
+}
+
+.error-container a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #2f80ed;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.error-container a:hover {
+  background-color: #1366d6;
+}
+
+.error-container::before {
+  content: "🚧";
+  font-size: 4rem;
+  margin-bottom: 1rem;
 }
