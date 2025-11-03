@@ -47,7 +47,10 @@ const Restaurantcard = (props) => {
 };
 
 const Foodwebsite = () => {
-    const [restaurantlist, setRestaurantlist] = useState(initalrestaurantlist);
+    const [restaurantlist, setRestaurantlist] = useState([]);
+    const [searchrestaurantlist, setSearchRestaurantlist] = useState([]);
+    const [searchfilter, setSearchfilter] = useState("");
+
 
     useEffect(() => {
         fetchdata();
@@ -57,23 +60,36 @@ const Foodwebsite = () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&collection=83631&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
         const json = await data.json();
         const rawCards = json.data.cards;
-        const restaurantList = rawCards .map(card => card?.card?.card?.info).filter(info => info && info.name); // Ensure valid restaurant info
-        setRestaurantlist(restaurantList);
+        const allrestaurantList = rawCards .map(card => card?.card?.card?.info).filter(info => info && info.name); // Ensure valid restaurant info
+        setRestaurantlist(allrestaurantList);
+        setSearchRestaurantlist(allrestaurantList);
 
     }
     return(
         <div>
             <Header />
-        {/* <button className="btn" onClick={() => {
+        <button className="btn" onClick={() => {
             const selectRating = restaurantlist.filter((restaurant) => restaurant.avgRating > 4);
             setRestaurantlist(selectRating);
         }}> top rated restaurant </button>
-         */}
+
+        <div className="search-container">
+            <input type="text" className="search-box" placeholder="Search..." value = {searchfilter} onChange={(event) => {
+                setSearchfilter(event.target.value);
+            }} />
+            <button className="search-button" onClick={() =>{
+                const filteredrestaurant = restaurantlist.filter((restaurant) => restaurant.name.toLowerCase().includes(searchfilter.toLowerCase()));
+                setSearchRestaurantlist(filteredrestaurant);
+            }
+            }>🔍</button>
+            </div>
+
+        
         <div className="card-container">
   
   <div className="card-row">
     {
-        restaurantlist.map((res) => <Restaurantcard key={res.id} resdata = {res} />)
+        searchrestaurantlist.map((res) => <Restaurantcard key={res.id} resdata = {res} />)
     }
     
   </div>
