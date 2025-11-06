@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom/client";
 import { useState } from "react";
 import { useEffect } from "react";
-import Restaurantcard from "./Restaurantcard";
+import Restaurantcard, {promotedlabel} from "./Restaurantcard";
 
 const Body = () => {
     const [restaurantlist, setRestaurantlist] = useState([]);
@@ -30,6 +30,8 @@ const Body = () => {
         setSearchRestaurantlist(filteredrestaurant);
     };
 
+    const Restaurantcardpromoted = promotedlabel(Restaurantcard);
+
     return (        
         <div>
         <button className="btn" onClick={() => {
@@ -55,8 +57,10 @@ const Body = () => {
                  <div className="card-container">
                         <div className="card-row">
                 {
-                    searchrestaurantlist.map((res) => <Restaurantcard key={res.id} resdata = {res} />)
+                    searchrestaurantlist.map((res) => res.promoted ? (<Restaurantcardpromoted key={res.id} resdata = {res} />) : (<Restaurantcard key={res.id} resdata = {res} />))
+                    
                 }
+                  
                 
               </div>
             </div>

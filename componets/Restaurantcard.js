@@ -1,5 +1,5 @@
 const Restaurantcard = (props) => {
-     const { name, cloudinaryImageId, costForTwo, avgRating, cuisines } = props.resdata;
+     const { name, cloudinaryImageId, costForTwo, avgRating, cuisines, promoted } = props.resdata;
 
     return(
         <div className="card">
@@ -11,5 +11,16 @@ const Restaurantcard = (props) => {
         </div>
     );
 };
+
+export const promotedlabel = (Restaurantcard) => {
+    return (props) => {
+        return(
+        <div>
+            Promoted
+            <Restaurantcard {...props} />
+        </div>
+        );
+    };
+}
 
 export default Restaurantcard;
